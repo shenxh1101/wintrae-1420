@@ -20,15 +20,18 @@ const ProjectDetailPage: React.FC = () => {
   const router = useRouter();
   const projectId = router.params.id as string;
 
-  const getProjectById = useAppStore((state) => state.getProjectById);
-  const getMaterialsByProjectId = useAppStore((state) => state.getMaterialsByProjectId);
+  const projects = useAppStore((state) => state.projects);
+  const allMaterials = useAppStore((state) => state.materials);
   const updateMilestone = useAppStore((state) => state.updateMilestone);
   const updateProject = useAppStore((state) => state.updateProject);
 
-  const project = useMemo(() => getProjectById(projectId), [projectId, getProjectById]);
+  const project = useMemo(
+    () => projects.find((p) => p.id === projectId),
+    [projects, projectId]
+  );
   const materials = useMemo(
-    () => getMaterialsByProjectId(projectId),
-    [projectId, getMaterialsByProjectId]
+    () => allMaterials.filter((m) => m.projectId === projectId),
+    [allMaterials, projectId]
   );
 
   useDidShow(() => {
@@ -117,6 +120,18 @@ const ProjectDetailPage: React.FC = () => {
     Taro.navigateTo({
       url: `/pages/material-edit/index?projectId=${projectId}`
     });
+  };
+
+  const handleUploadToMilestone = (milestoneId: string) => {
+    console.log('[ProjectDetailPage] 上传到节点:', milestoneId);
+    Taro.navigateTo({
+      url: `/pages/material-edit/index?projectId=${projectId}&milestoneId=${milestoneId}`
+    });
+  };
+
+  const getMilestoneMaterials = (milestone: ProjectMilestone) => {
+    if (!milestone.attachedFileIds || milestone.attachedFileIds.length === 0) return [];
+    return materials.filter((m) => milestone.attachedFileIds!.includes(m.id));
   };
 
   const handleEditProject = () => {
@@ -315,11 +330,38 @@ const ProjectDetailPage: React.FC = () => {
                 </View>
                 <Text className={styles.stepDeadline}>截止：{formatDate(milestone.deadline)}</Text>
                 <Text className={styles.stepDesc}>{milestone.description}</Text>
+                <View className={styles.stepMetaRow}>
+                  <Text className={styles.stepMeta}>
+                    修改次数：{milestone.revisionCount || 0}
+                  </Text>
+                  <Text className={styles.stepMeta}>
+                    关联文件：{getMilestoneMaterials(milestone).length} 个
+                  </Text>
+                </View>
                 {milestone.completedAt && (
                   <Text className={styles.completedAt}>
                     完成于 {formatDate(milestone.completedAt)}
                   </Text>
                 )}
+                {getMilestoneMaterials(milestone).length > 0 && (
+                  <View className={styles.milestoneFiles}>
+                    {getMilestoneMaterials(milestone).map((mat) => (
+                      <View key={mat.id} className={styles.milestoneFileItem}>
+                        <Text className={styles.milestoneFileName}>📎 {mat.name}</Text>
+                        <Text className={styles.milestoneFileVersion}>{mat.version}</Text>
+                      </View>
+                    ))}
+                  </View>
+                )}
+                <View
+                  className={styles.uploadToMilestoneBtn}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleUploadToMilestone(milestone.id);
+                  }}
+                >
+                  <Text className={styles.uploadToMilestoneText}>+ 上传到此节点</Text>
+                </View>
               </View>
             </View>
           ))}

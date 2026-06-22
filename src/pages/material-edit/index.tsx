@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, Input, Textarea, Button, Picker, Image } from '@tarojs/components';
 import { useRouter, useDidShow, Taro } from '@tarojs/taro';
 import classnames from 'classnames';
@@ -28,11 +28,12 @@ const getRandomPicsumUrl = (): string => {
 
 const MaterialEditPage: React.FC = () => {
   const router = useRouter();
-  const { id, projectId } = router.params;
+  const { id, projectId, milestoneId } = router.params;
 
   const projects = useAppStore((state) => state.projects);
   const addMaterial = useAppStore((state) => state.addMaterial);
   const updateMaterial = useAppStore((state) => state.updateMaterial);
+  const attachMaterialToMilestone = useAppStore((state) => state.attachMaterialToMilestone);
   const materials = useAppStore((state) => state.materials);
 
   const isEditMode = !!id;
@@ -54,6 +55,25 @@ const MaterialEditPage: React.FC = () => {
     return projects.length > 0 ? 0 : -1;
   });
 
+  const selectedProject = useMemo(() => {
+    if (selectedProjectIndex >= 0 && selectedProjectIndex < projects.length) {
+      return projects[selectedProjectIndex];
+    }
+    return null;
+  }, [selectedProjectIndex, projects]);
+
+  const [selectedMilestoneIndex, setSelectedMilestoneIndex] = useState<number>(() => {
+    if (!selectedProject) return -1;
+    if (milestoneId) {
+      const idx = selectedProject.milestones.findIndex((m) => m.id === milestoneId);
+      return idx >= 0 ? idx : -1;
+    }
+    if (selectedProject && selectedProject.currentMilestone !== undefined) {
+      return selectedProject.currentMilestone;
+    }
+    return -1;
+  });
+
   const [type, setType] = useState<MaterialType>(existingMaterial?.type || 'reference');
   const [name, setName] = useState<string>(existingMaterial?.name || '');
   const [url, setUrl] = useState<string>(existingMaterial?.url || getRandomPicsumUrl());
@@ -62,17 +82,35 @@ const MaterialEditPage: React.FC = () => {
   const [description, setDescription] = useState<string>(existingMaterial?.description || '');
 
   const projectPickerRange = useMemo(() => projects.map((p) => p.title), [projects]);
+  const milestonePickerRange = useMemo(() => {
+    if (!selectedProject) return [];
+    return selectedProject.milestones.map((m) => m.name);
+  }, [selectedProject]);
 
-  const selectedProject = useMemo(() => {
-    if (selectedProjectIndex >= 0 && selectedProjectIndex < projects.length) {
-      return projects[selectedProjectIndex];
+  const selectedMilestone = useMemo(() => {
+    if (!selectedProject) return null;
+    if (selectedMilestoneIndex >= 0 && selectedMilestoneIndex < selectedProject.milestones.length) {
+      return selectedProject.milestones[selectedMilestoneIndex];
     }
     return null;
-  }, [selectedProjectIndex, projects]);
+  }, [selectedProject, selectedMilestoneIndex]);
 
   useDidShow(() => {
     console.log('[MaterialEditPage] 页面显示', { id, projectId, isEditMode });
   });
+
+  useEffect(() => {
+    if (selectedProject) {
+      if (milestoneId) {
+        const idx = selectedProject.milestones.findIndex((m) => m.id === milestoneId);
+        setSelectedMilestoneIndex(idx >= 0 ? idx : (selectedProject.currentMilestone || 0));
+      } else if (selectedMilestoneIndex === -1 || selectedMilestoneIndex >= selectedProject.milestones.length) {
+        setSelectedMilestoneIndex(selectedProject.currentMilestone || 0);
+      }
+    } else {
+      setSelectedMilestoneIndex(-1);
+    }
+  }, [selectedProject, milestoneId]);
 
   const handleRandomImage = () => {
     setUrl(getRandomPicsumUrl());
@@ -110,6 +148,9 @@ const MaterialEditPage: React.FC = () => {
       updateMaterial(existingMaterial.id, materialData);
     } else {
       addMaterial(materialData);
+      if (selectedMilestone) {
+        attachMaterialToMilestone(selectedProject.id, selectedMilestone.id, materialData.id);
+      }
     }
 
     Taro.showToast({
@@ -174,6 +215,33 @@ const MaterialEditPage: React.FC = () => {
             ) : (
               <View className={styles.pickerWrap}>
                 <Text className={styles.pickerPlaceholder}>暂无可用项目</Text>
+              </View>
+            )}
+          </View>
+
+          <View className={styles.formItem}>
+            <Text className={styles.formLabel}>关联节点（选填）</Text>
+            {milestonePickerRange.length > 0 ? (
+              <Picker
+                mode="selector"
+                range={milestonePickerRange}
+                value={selectedMilestoneIndex >= 0 ? selectedMilestoneIndex : 0}
+                onChange={(e) => setSelectedMilestoneIndex(Number(e.detail.value))}
+              >
+                <View className={styles.pickerWrap}>
+                  <Text
+                    className={classnames(
+                      selectedMilestone ? styles.pickerText : styles.pickerPlaceholder
+                    )}
+                  >
+                    {selectedMilestone ? selectedMilestone.name : '请选择关联的阶段节点'}
+                  </Text>
+                  <Text className={styles.pickerArrow}>›</Text>
+                </View>
+              </Picker>
+            ) : (
+              <View className={styles.pickerWrap}>
+                <Text className={styles.pickerPlaceholder}>请先选择关联项目</Text>
               </View>
             )}
           </View>

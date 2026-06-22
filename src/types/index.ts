@@ -60,6 +60,8 @@ export interface ProjectMilestone {
   deadline: string;
   completedAt?: string;
   description: string;
+  revisionCount?: number;
+  attachedFileIds?: string[];
 }
 
 export interface Project {

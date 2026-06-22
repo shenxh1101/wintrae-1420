@@ -33,6 +33,7 @@ interface AppState {
   updateMaterial: (id: string, material: Partial<MaterialFile>) => void;
   addTransaction: (transaction: Transaction) => void;
   updateMilestone: (projectId: string, milestoneId: string, milestone: Partial<ProjectMilestone>) => void;
+  attachMaterialToMilestone: (projectId: string, milestoneId: string, materialId: string) => void;
 
   getClientById: (id: string) => Client | undefined;
   getProjectById: (id: string) => Project | undefined;
@@ -192,6 +193,30 @@ export const useAppStore = create<AppState>((set, get) => ({
           currentMilestone,
           status: newStatus,
           statusLabel: newStatusLabel
+        };
+      })
+    }));
+    doPersist(get());
+  },
+  attachMaterialToMilestone: (projectId, milestoneId, materialId) => {
+    set((state) => ({
+      projects: state.projects.map(p => {
+        if (p.id !== projectId) return p;
+        const updatedMilestones = p.milestones.map(m => {
+          if (m.id !== milestoneId) return m;
+          const existingIds = m.attachedFileIds || [];
+          if (existingIds.includes(materialId)) return m;
+          return {
+            ...m,
+            attachedFileIds: [...existingIds, materialId],
+            revisionCount: (m.revisionCount || 0) + 1
+          };
+        });
+        const totalRevisionCount = updatedMilestones.reduce((sum, m) => sum + (m.revisionCount || 0), 0);
+        return {
+          ...p,
+          milestones: updatedMilestones,
+          revisionCount: totalRevisionCount
         };
       })
     }));

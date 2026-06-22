@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, ScrollView, Button } from '@tarojs/components';
-import { useDidShow } from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 import { useAppStore } from '@/store/useAppStore';
 import ClientCard from '@/components/ClientCard';
 import SearchBar from '@/components/SearchBar';

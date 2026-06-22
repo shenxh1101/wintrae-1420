@@ -22,7 +22,9 @@ const generateMilestones = (startDate: string): ProjectMilestone[] => {
     name: tpl.name,
     status: 'pending' as const,
     deadline: dayjs(startDate).add((index + 1) * 3, 'day').format('YYYY-MM-DD'),
-    description: tpl.description
+    description: tpl.description,
+    revisionCount: 0,
+    attachedFileIds: []
   }));
 };
 

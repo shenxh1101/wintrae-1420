@@ -389,6 +389,66 @@
   color: $color-success;
 }
 
+.stepMetaRow {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-xs;
+}
+
+.stepMeta {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+}
+
+.milestoneFiles {
+  margin-top: $spacing-sm;
+  padding: $spacing-sm;
+  background: $color-bg-hover;
+  border-radius: $radius-sm;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.milestoneFileItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.milestoneFileName {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.milestoneFileVersion {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+  flex-shrink: 0;
+  margin-left: $spacing-sm;
+}
+
+.uploadToMilestoneBtn {
+  margin-top: $spacing-sm;
+  padding: 12rpx 20rpx;
+  border: 2rpx dashed $color-primary;
+  border-radius: $radius-sm;
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+}
+
+.uploadToMilestoneText {
+  font-size: $font-size-xs;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
 .materialsHeader {
   display: flex;
   justify-content: space-between;
