@@ -35,6 +35,7 @@ const MaterialsPage: React.FC = () => {
 
   const handleAddMaterial = () => {
     console.log('[MaterialsPage] 上传素材');
+    Taro.navigateTo({ url: '/pages/material-edit/index' });
   };
 
   return (

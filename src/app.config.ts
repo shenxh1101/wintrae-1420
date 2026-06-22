@@ -8,7 +8,11 @@ export default defineAppConfig({
     'pages/client-detail/index',
     'pages/quote-detail/index',
     'pages/project-detail/index',
-    'pages/search/index'
+    'pages/search/index',
+    'pages/client-edit/index',
+    'pages/quote-edit/index',
+    'pages/project-edit/index',
+    'pages/material-edit/index'
   ],
   window: {
     backgroundTextStyle: 'light',

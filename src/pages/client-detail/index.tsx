@@ -41,9 +41,9 @@ const ClientDetailPage: React.FC = () => {
   };
 
   const handleNewQuote = () => {
-    console.log('[ClientDetailPage] 新建报价');
+    console.log('[ClientDetailPage] 新建报价，客户ID:', clientId);
     Taro.navigateTo({
-      url: '/pages/quote-detail/index'
+      url: `/pages/quote-edit/index?clientId=${clientId}`
     });
   };
 

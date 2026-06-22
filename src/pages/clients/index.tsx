@@ -32,6 +32,7 @@ const ClientsPage: React.FC = () => {
 
   const handleAddClient = () => {
     console.log('[ClientsPage] 新建客户');
+    Taro.navigateTo({ url: '/pages/client-edit/index' });
   };
 
   return (

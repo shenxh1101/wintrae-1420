@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { View, Text, ScrollView, Button } from '@tarojs/components';
-import { useDidShow } from '@tarojs/taro';
+import Taro, { useDidShow } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useAppStore } from '@/store/useAppStore';
 import ProjectCard from '@/components/ProjectCard';
@@ -38,6 +38,7 @@ const ProjectsPage: React.FC = () => {
 
   const handleAddProject = () => {
     console.log('[ProjectsPage] 新建项目');
+    Taro.navigateTo({ url: '/pages/project-edit/index' });
   };
 
   return (

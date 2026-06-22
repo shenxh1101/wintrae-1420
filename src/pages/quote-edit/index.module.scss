@@ -1,0 +1,359 @@
+@use '@/styles/variables.scss' as *;
+
+.pageContainer {
+  padding: 0 $page-padding;
+  padding-bottom: 200rpx;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: $color-bg-page;
+}
+
+.formSection {
+  margin-bottom: $spacing-lg;
+}
+
+.sectionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-sm;
+  border-left: 6rpx solid $color-primary;
+  line-height: 1.2;
+}
+
+.card {
+  background-color: $color-bg-card;
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+}
+
+.formItem {
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.formLabel {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+  margin-bottom: $spacing-sm;
+}
+
+.formLabelRequired {
+  color: $color-error;
+  margin-right: 4rpx;
+}
+
+.formInput {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  padding: $spacing-sm 0;
+  line-height: 1.5;
+}
+
+.formTextarea {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  padding: $spacing-sm 0;
+  line-height: 1.6;
+  min-height: 160rpx;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.formDisabled {
+  color: $color-text-tertiary;
+  background-color: $color-bg-hover;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $radius-sm;
+}
+
+.typeSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.typeButton {
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  background-color: $color-bg-hover;
+  color: $color-text-secondary;
+  border: 2rpx solid transparent;
+  text-align: center;
+  min-width: 140rpx;
+
+  &.active {
+    background-color: $color-primary;
+    color: $color-text-white;
+    border-color: $color-primary;
+  }
+}
+
+.licenseSelector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-sm;
+}
+
+.licenseButton {
+  padding: $spacing-sm $spacing-lg;
+  border-radius: $radius-button;
+  font-size: $font-size-md;
+  background-color: $color-bg-hover;
+  color: $color-text-secondary;
+  border: 2rpx solid transparent;
+  text-align: center;
+  min-width: 160rpx;
+
+  &.active {
+    background-color: $color-primary;
+    color: $color-text-white;
+    border-color: $color-primary;
+  }
+}
+
+.ratioRow {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  margin-top: $spacing-sm;
+}
+
+.ratioValue {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-primary;
+  min-width: 80rpx;
+  text-align: center;
+}
+
+.ratioSlider {
+  flex: 1;
+}
+
+.amountRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.amountLabel {
+  font-size: $font-size-md;
+  color: $color-text-secondary;
+}
+
+.amountValue {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+}
+
+.totalAmount {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-primary;
+}
+
+.itemsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.itemsTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.addItemButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md;
+  background-color: $color-primary;
+  color: $color-text-white;
+  border-radius: $radius-sm;
+  font-size: $font-size-sm;
+}
+
+.itemCard {
+  background-color: $color-bg-page;
+  border-radius: $radius-sm;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  position: relative;
+}
+
+.itemHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+}
+
+.itemIndex {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-primary;
+}
+
+.removeItemButton {
+  width: 56rpx;
+  height: 56rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-error;
+  font-size: $font-size-lg;
+  background-color: transparent;
+  padding: 0;
+  line-height: 1;
+}
+
+.itemInputRow {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: $spacing-sm;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.itemInputLabel {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
+  margin-bottom: $spacing-xs;
+}
+
+.itemInput {
+  font-size: $font-size-md;
+  color: $color-text-primary;
+  padding: $spacing-xs 0;
+}
+
+.footerBar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: $spacing-md $page-padding;
+  padding-bottom: calc(#{$spacing-md} + env(safe-area-inset-bottom));
+  background-color: $color-bg-card;
+  box-shadow: $shadow-float;
+  display: flex;
+  gap: $spacing-md;
+}
+
+.saveButton {
+  flex: 1;
+  height: $button-height-lg;
+  background-color: $color-primary;
+  color: $color-text-white;
+  border-radius: $radius-button;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelButton {
+  height: $button-height-lg;
+  padding: 0 $spacing-xl;
+  background-color: $color-bg-hover;
+  color: $color-text-secondary;
+  border-radius: $radius-button;
+  font-size: $font-size-lg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rowInputGroup {
+  display: flex;
+  gap: $spacing-md;
+}
+
+.rowInputItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: $spacing-md 0;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.summaryCard {
+  background: linear-gradient(135deg, $color-primary 0%, $color-primary-dark 100%);
+  border-radius: $radius-md;
+  padding: $spacing-lg;
+  margin-bottom: $spacing-lg;
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm 0;
+}
+
+.summaryLabel {
+  font-size: $font-size-md;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.summaryValue {
+  font-size: $font-size-md;
+  color: $color-text-white;
+  font-weight: $font-weight-medium;
+}
+
+.summaryTotal {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-text-white;
+}
+
+.summaryDivider {
+  height: 1rpx;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: $spacing-sm 0;
+}
+
+.sectionTitleNoMargin {
+  margin-bottom: 0;
+}
+
+.cardPlain {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.ratioHintRow {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16rpx;
+}
+
+.ratioHintText {
+  font-size: 24rpx;
+  color: $color-text-secondary;
+}

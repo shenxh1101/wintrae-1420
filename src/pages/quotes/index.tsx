@@ -44,6 +44,7 @@ const QuotesPage: React.FC = () => {
 
   const handleAddQuote = () => {
     console.log('[QuotesPage] 新建报价');
+    Taro.navigateTo({ url: '/pages/quote-edit/index' });
   };
 
   return (
