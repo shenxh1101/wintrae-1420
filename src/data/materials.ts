@@ -1,0 +1,150 @@
+import type { MaterialFile } from '@/types';
+
+export const mockMaterials: MaterialFile[] = [
+  {
+    id: 'mat1',
+    projectId: 'p1',
+    projectTitle: '生日头像约稿',
+    type: 'reference',
+    typeLabel: '参考图',
+    name: '客户提供的参考画风1',
+    url: 'https://picsum.photos/id/1025/750/500',
+    version: 'v1.0',
+    description: '客户喜欢的画风参考，粉紫色调',
+    createdAt: '2026-06-01'
+  },
+  {
+    id: 'mat2',
+    projectId: 'p1',
+    projectTitle: '生日头像约稿',
+    type: 'reference',
+    typeLabel: '参考图',
+    name: '角色设定参考',
+    url: 'https://picsum.photos/id/237/750/500',
+    version: 'v1.0',
+    description: '客户提供的照片参考',
+    createdAt: '2026-06-01'
+  },
+  {
+    id: 'mat3',
+    projectId: 'p1',
+    projectTitle: '生日头像约稿',
+    type: 'work',
+    typeLabel: '作品文件',
+    name: '草稿方案1',
+    url: 'https://picsum.photos/id/659/750/500',
+    version: 'v0.1',
+    description: '第一版草稿，可爱风',
+    createdAt: '2026-06-02'
+  },
+  {
+    id: 'mat4',
+    projectId: 'p1',
+    projectTitle: '生日头像约稿',
+    type: 'work',
+    typeLabel: '作品文件',
+    name: '线稿确认版',
+    url: 'https://picsum.photos/id/219/750/500',
+    version: 'v0.5',
+    description: '客户确认后的线稿',
+    createdAt: '2026-06-04'
+  },
+  {
+    id: 'mat5',
+    projectId: 'p1',
+    projectTitle: '生日头像约稿',
+    type: 'work',
+    typeLabel: '作品文件',
+    name: '上色版本',
+    url: 'https://picsum.photos/id/1080/750/500',
+    version: 'v1.0',
+    revisionMark: '修改1',
+    description: '第一版上色，粉色系',
+    createdAt: '2026-06-06'
+  },
+  {
+    id: 'mat6',
+    projectId: 'p2',
+    projectTitle: '游戏角色立绘',
+    type: 'reference',
+    typeLabel: '参考图',
+    name: '游戏世界观参考',
+    url: 'https://picsum.photos/id/1039/750/500',
+    version: 'v1.0',
+    description: '游戏整体风格参考，欧式奇幻',
+    createdAt: '2026-05-10'
+  },
+  {
+    id: 'mat7',
+    projectId: 'p2',
+    projectTitle: '游戏角色立绘',
+    type: 'reference',
+    typeLabel: '参考图',
+    name: '装备设计参考',
+    url: 'https://picsum.photos/id/160/750/500',
+    version: 'v1.0',
+    description: '铠甲和武器设计参考',
+    createdAt: '2026-05-10'
+  },
+  {
+    id: 'mat8',
+    projectId: 'p2',
+    projectTitle: '游戏角色立绘',
+    type: 'work',
+    typeLabel: '作品文件',
+    name: '角色三视图',
+    url: 'https://picsum.photos/id/1015/750/500',
+    version: 'v0.3',
+    description: '正侧背三视图草稿',
+    createdAt: '2026-05-14'
+  },
+  {
+    id: 'mat9',
+    projectId: 'p2',
+    projectTitle: '游戏角色立绘',
+    type: 'work',
+    typeLabel: '作品文件',
+    name: '线稿版本',
+    url: 'https://picsum.photos/id/1018/750/500',
+    version: 'v0.8',
+    revisionMark: '修改1',
+    description: '根据反馈调整后的线稿',
+    createdAt: '2026-06-01'
+  },
+  {
+    id: 'mat10',
+    projectId: 'p4',
+    projectTitle: '全家福画像',
+    type: 'delivery',
+    typeLabel: '交付文件',
+    name: '最终交付-高清JPG',
+    url: 'https://picsum.photos/id/100/750/500',
+    version: 'v2.0',
+    description: '最终交付文件，含PSD源文件',
+    createdAt: '2026-05-12'
+  },
+  {
+    id: 'mat11',
+    projectId: 'p4',
+    projectTitle: '全家福画像',
+    type: 'delivery',
+    typeLabel: '交付文件',
+    name: '源文件-PSD',
+    url: 'https://picsum.photos/id/101/750/500',
+    version: 'v2.0',
+    description: '分层PSD源文件',
+    createdAt: '2026-05-12'
+  },
+  {
+    id: 'mat12',
+    projectId: 'p3',
+    projectTitle: '品牌系列插画',
+    type: 'reference',
+    typeLabel: '参考图',
+    name: '品牌VI参考',
+    url: 'https://picsum.photos/id/220/750/500',
+    version: 'v1.0',
+    description: '品牌VI规范和配色',
+    createdAt: '2026-06-10'
+  }
+];

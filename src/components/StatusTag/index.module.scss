@@ -1,0 +1,55 @@
+@use '@/styles/variables.scss' as *;
+
+.statusTag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rpx 20rpx;
+  border-radius: $radius-sm;
+  white-space: nowrap;
+
+  &.tagSm {
+    padding: 4rpx 16rpx;
+
+    .tagText {
+      font-size: $font-size-xs;
+    }
+  }
+}
+
+.tagPending {
+  background: $color-tag-pending-bg;
+
+  .tagText {
+    color: $color-tag-pending-text;
+  }
+}
+
+.tagProgress {
+  background: $color-tag-progress-bg;
+
+  .tagText {
+    color: $color-tag-progress-text;
+  }
+}
+
+.tagDone {
+  background: $color-tag-done-bg;
+
+  .tagText {
+    color: $color-tag-done-text;
+  }
+}
+
+.tagCancel {
+  background: $color-tag-cancel-bg;
+
+  .tagText {
+    color: $color-tag-cancel-text;
+  }
+}
+
+.tagText {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+}

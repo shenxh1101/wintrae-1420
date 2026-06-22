@@ -1,0 +1,105 @@
+@use '@/styles/variables.scss' as *;
+
+.statCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6rpx;
+    background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%);
+  }
+}
+
+.typeIncome::before {
+  background: linear-gradient(90deg, $color-success 0%, #34D399 100%);
+}
+
+.typeExpense::before {
+  background: linear-gradient(90deg, $color-error 0%, #F87171 100%);
+}
+
+.typeAmount::before {
+  background: linear-gradient(90deg, $color-primary 0%, $color-primary-light 100%);
+}
+
+.typeCount::before {
+  background: linear-gradient(90deg, $color-warning 0%, #FBBF24 100%);
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-sm;
+}
+
+.cardIcon {
+  font-size: 40rpx;
+}
+
+.trend {
+  padding: 4rpx 16rpx;
+  border-radius: $radius-button;
+}
+
+.trendUp {
+  background: rgba(16, 185, 129, 0.1);
+
+  .trendText {
+    color: $color-success;
+  }
+}
+
+.trendDown {
+  background: rgba(239, 68, 68, 0.1);
+
+  .trendText {
+    color: $color-error;
+  }
+}
+
+.trendText {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.cardTitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  display: block;
+  margin-bottom: $spacing-xs;
+}
+
+.cardValue {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  color: $color-text-primary;
+  display: block;
+
+  .typeIncome & {
+    color: $color-success;
+  }
+
+  .typeExpense & {
+    color: $color-error;
+  }
+
+  .typeAmount & {
+    color: $color-amount;
+  }
+
+  .typeCount & {
+    color: $color-warning;
+  }
+}

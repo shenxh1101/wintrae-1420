@@ -1,0 +1,191 @@
+@use '@/styles/variables.scss' as *;
+
+.quoteCard {
+  background: $color-bg-card;
+  border-radius: $radius-lg;
+  padding: $spacing-lg;
+  box-shadow: $shadow-card;
+  margin-bottom: $spacing-md;
+  transition: all $transition-base;
+
+  &:active {
+    transform: scale(0.99);
+    box-shadow: $shadow-card-hover;
+  }
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: $spacing-md;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
+  gap: $spacing-md;
+  flex: 1;
+  min-width: 0;
+}
+
+.typeIcon {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(167, 139, 250, 0.15) 100%);
+  flex-shrink: 0;
+
+  &.type-avatar {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.1) 0%, rgba(244, 114, 182, 0.15) 100%);
+  }
+
+  &.type-cover {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(96, 165, 250, 0.15) 100%);
+  }
+
+  &.type-commercial {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.15) 100%);
+  }
+
+  &.type-illustration {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(251, 191, 36, 0.15) 100%);
+  }
+}
+
+.typeEmoji {
+  font-size: 36rpx;
+}
+
+.headerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.quoteTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+  display: block;
+  @include text-ellipsis;
+}
+
+.clientName {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  margin-top: 4rpx;
+  display: block;
+  @include text-ellipsis;
+}
+
+.statusBadge {
+  padding: 6rpx 20rpx;
+  border-radius: $radius-button;
+}
+
+.statusDraft {
+  background: $color-tag-pending-bg;
+  .statusText { color: $color-tag-pending-text; }
+}
+
+.statusSent {
+  background: $color-tag-progress-bg;
+  .statusText { color: $color-tag-progress-text; }
+}
+
+.statusAccepted {
+  background: $color-tag-done-bg;
+  .statusText { color: $color-tag-done-text; }
+}
+
+.statusRejected {
+  background: $color-tag-cancel-bg;
+  .statusText { color: $color-tag-cancel-text; }
+}
+
+.statusText {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+}
+
+.cardBody {
+  padding: $spacing-md 0;
+  border-top: 1rpx solid $color-divider;
+  border-bottom: 1rpx solid $color-divider;
+}
+
+.priceSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.priceLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.priceValue {
+  font-size: $font-size-xxl;
+  font-weight: $font-weight-bold;
+  color: $color-amount;
+}
+
+.detailsGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-md;
+  margin-bottom: $spacing-md;
+}
+
+.detailItem {
+  width: calc(50% - #{$spacing-sm});
+}
+
+.detailLabel {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+  display: block;
+  margin-bottom: 4rpx;
+}
+
+.detailValue {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-primary;
+}
+
+.licenseSection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $spacing-md;
+  border-top: 1rpx dashed $color-divider;
+}
+
+.licenseLabel {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+}
+
+.licenseValue {
+  font-size: $font-size-sm;
+  color: $color-primary;
+  font-weight: $font-weight-medium;
+}
+
+.cardFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: $spacing-md;
+}
+
+.dateText, .expireText {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}

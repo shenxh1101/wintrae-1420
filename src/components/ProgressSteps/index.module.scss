@@ -1,0 +1,107 @@
+@use '@/styles/variables.scss' as *;
+
+.progressSteps {
+  padding: $spacing-sm 0;
+}
+
+.stepItem {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.stepLeft {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 48rpx;
+  flex-shrink: 0;
+}
+
+.stepDot {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: $radius-round;
+  background: $color-bg-hover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3rpx solid $color-border;
+  flex-shrink: 0;
+  z-index: 1;
+
+  &.completed {
+    background: $color-success;
+    border-color: $color-success;
+  }
+
+  &.inProgress,
+  &.current {
+    background: $color-primary;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 8rpx rgba(139, 92, 246, 0.15);
+  }
+}
+
+.dotIcon {
+  font-size: $font-size-sm;
+  color: $color-text-white;
+  font-weight: $font-weight-semibold;
+}
+
+.stepLine {
+  width: 3rpx;
+  flex: 1;
+  min-height: 40rpx;
+  background: $color-border;
+  margin: $spacing-xs 0;
+
+  &.lineCompleted {
+    background: $color-success;
+  }
+}
+
+.stepContent {
+  flex: 1;
+  padding-bottom: $spacing-sm;
+}
+
+.stepHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-xs;
+}
+
+.stepName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+
+  &.textCompleted {
+    color: $color-text-tertiary;
+    text-decoration: line-through;
+  }
+}
+
+.stepDeadline {
+  font-size: $font-size-xs;
+  color: $color-text-tertiary;
+}
+
+.stepDesc {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  display: block;
+  line-height: 1.5;
+  margin-bottom: $spacing-xs;
+}
+
+.completedAt {
+  font-size: $font-size-xs;
+  color: $color-success;
+}
