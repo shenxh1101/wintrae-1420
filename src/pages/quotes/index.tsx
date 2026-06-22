@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { View, Text, ScrollView, Button } from '@tarojs/components';
-import Taro, { useDidShow } from '@tarojs/taro';
+import Taro, { useDidShow, useRouter } from '@tarojs/taro';
 import classnames from 'classnames';
 import { useAppStore } from '@/store/useAppStore';
 import QuoteCard from '@/components/QuoteCard';
@@ -9,13 +9,29 @@ import type { Quote } from '@/types';
 import styles from './index.module.scss';
 
 const QuotesPage: React.FC = () => {
+  const router = useRouter();
+  const { autoSelect: urlAutoSelect } = router.params;
+
   const quotes = useAppStore((state) => state.quotes);
   const [activeType, setActiveType] = useState<string>('all');
   const [activeStatus, setActiveStatus] = useState<string>('all');
+  const [showAutoHint, setShowAutoHint] = useState(false);
 
   useDidShow(() => {
-    console.log('[QuotesPage] 页面显示');
+    console.log('[QuotesPage] 页面显示', { urlAutoSelect });
   });
+
+  useEffect(() => {
+    if (urlAutoSelect === 'true') {
+      const lastQuote = quotes[quotes.length - 1];
+      if (lastQuote) {
+        setActiveType(lastQuote.type);
+        setActiveStatus(lastQuote.status);
+        setShowAutoHint(true);
+        setTimeout(() => setShowAutoHint(false), 3000);
+      }
+    }
+  }, [urlAutoSelect, quotes]);
 
   const types = useMemo(() => [
     { key: 'all', label: '全部', icon: '📋' },
@@ -80,6 +96,14 @@ const QuotesPage: React.FC = () => {
           </View>
         ))}
       </ScrollView>
+
+      {showAutoHint && (
+        <View className={styles.autoHint}>
+          <Text className={styles.autoHintText}>
+            已自动筛选到刚添加的报价
+          </Text>
+        </View>
+      )}
 
       <ScrollView scrollY className={styles.quotesList}>
         {filteredQuotes.length > 0 ? (

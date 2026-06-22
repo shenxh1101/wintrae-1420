@@ -101,6 +101,8 @@ export interface MaterialFile {
   revisionMark?: string;
   description: string;
   createdAt: string;
+  sentToClient?: boolean;
+  sentAt?: string;
 }
 
 export interface Transaction {

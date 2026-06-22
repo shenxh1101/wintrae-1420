@@ -34,6 +34,7 @@ interface AppState {
   addTransaction: (transaction: Transaction) => void;
   updateMilestone: (projectId: string, milestoneId: string, milestone: Partial<ProjectMilestone>) => void;
   attachMaterialToMilestone: (projectId: string, milestoneId: string, materialId: string) => void;
+  toggleMaterialSent: (materialId: string) => void;
 
   getClientById: (id: string) => Client | undefined;
   getProjectById: (id: string) => Project | undefined;
@@ -217,6 +218,20 @@ export const useAppStore = create<AppState>((set, get) => ({
           ...p,
           milestones: updatedMilestones,
           revisionCount: totalRevisionCount
+        };
+      })
+    }));
+    doPersist(get());
+  },
+  toggleMaterialSent: (materialId) => {
+    set((state) => ({
+      materials: state.materials.map(m => {
+        if (m.id !== materialId) return m;
+        const nowSent = !m.sentToClient;
+        return {
+          ...m,
+          sentToClient: nowSent,
+          sentAt: nowSent ? new Date().toISOString() : undefined
         };
       })
     }));

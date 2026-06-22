@@ -543,9 +543,127 @@
     color: $color-text-white;
   }
 
+  &.btnPurple {
+    background: linear-gradient(135deg, $color-primary-dark 0%, $color-primary 100%);
+    color: $color-text-white;
+  }
+
   &.btnDisabled {
     background: $color-bg-hover;
     color: $color-text-disabled;
     pointer-events: none;
   }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $spacing-md;
+}
+
+.sectionSubtitle {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.deliveryGroup {
+  margin-bottom: $spacing-md;
+  background: $color-bg-card;
+  border-radius: $radius-md;
+  overflow: hidden;
+  border: 1rpx solid $color-border;
+}
+
+.deliveryGroupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-md $spacing-lg;
+  background: $color-bg-hover;
+  border-bottom: 1rpx solid $color-border;
+}
+
+.deliveryGroupName {
+  font-size: $font-size-md;
+  font-weight: $font-weight-semibold;
+  color: $color-text-primary;
+}
+
+.deliveryGroupCount {
+  font-size: $font-size-sm;
+  color: $color-text-secondary;
+  font-weight: $font-weight-semibold;
+}
+
+.deliveryFileList {
+  padding: $spacing-sm 0;
+}
+
+.deliveryFileItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-sm $spacing-lg;
+  gap: $spacing-sm;
+}
+
+.deliveryFileSent {
+  opacity: 0.7;
+}
+
+.deliveryFileInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.deliveryFileName {
+  font-size: $font-size-sm;
+  color: $color-text-primary;
+  font-weight: $font-weight-medium;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.deliveryFileMeta {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  margin-top: 4rpx;
+  display: block;
+}
+
+.deliveryToggle {
+  flex-shrink: 0;
+  padding: 8rpx 16rpx;
+  border-radius: $radius-sm;
+  background: $color-bg-hover;
+  border: 1rpx solid $color-border;
+}
+
+.deliveryToggleActive {
+  background: rgba($color-success, 0.1);
+  border-color: $color-success;
+}
+
+.deliveryToggleText {
+  font-size: $font-size-xs;
+  color: $color-text-secondary;
+  font-weight: $font-weight-medium;
+}
+
+.deliveryToggleActive .deliveryToggleText {
+  color: $color-success;
+}
+
+.deliveryEmpty {
+  padding: $spacing-md $spacing-lg;
+  text-align: center;
+}
+
+.deliveryEmptyText {
+  font-size: $font-size-sm;
+  color: $color-text-tertiary;
 }

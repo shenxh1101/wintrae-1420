@@ -24,6 +24,7 @@ const ProjectDetailPage: React.FC = () => {
   const allMaterials = useAppStore((state) => state.materials);
   const updateMilestone = useAppStore((state) => state.updateMilestone);
   const updateProject = useAppStore((state) => state.updateProject);
+  const toggleMaterialSent = useAppStore((state) => state.toggleMaterialSent);
 
   const project = useMemo(
     () => projects.find((p) => p.id === projectId),
@@ -133,6 +134,27 @@ const ProjectDetailPage: React.FC = () => {
     if (!milestone.attachedFileIds || milestone.attachedFileIds.length === 0) return [];
     return materials.filter((m) => milestone.attachedFileIds!.includes(m.id));
   };
+
+  const handleToggleSent = (materialId: string, e: any) => {
+    e.stopPropagation();
+    toggleMaterialSent(materialId);
+  };
+
+  const handleViewReview = () => {
+    console.log('[ProjectDetailPage] 查看项目复盘:', projectId);
+    Taro.navigateTo({
+      url: `/pages/project-review/index?id=${projectId}`
+    });
+  };
+
+  const deliveryChecklist = useMemo(() => {
+    if (!project) return [];
+    return project.milestones.map((milestone) => ({
+      milestone,
+      files: getMilestoneMaterials(milestone),
+      sentCount: getMilestoneMaterials(milestone).filter((m) => m.sentToClient).length
+    }));
+  }, [project, materials]);
 
   const handleEditProject = () => {
     console.log('[ProjectDetailPage] 编辑项目:', projectId);
@@ -391,6 +413,62 @@ const ProjectDetailPage: React.FC = () => {
         )}
       </View>
 
+      <View className={styles.section}>
+        <View className={styles.sectionHeader}>
+          <Text className={styles.sectionTitle}>交付清单</Text>
+          <Text className={styles.sectionSubtitle}>
+            已发 {materials.filter((m) => m.sentToClient).length} / 共 {materials.length}
+          </Text>
+        </View>
+        {deliveryChecklist.map((group) => (
+          <View key={group.milestone.id} className={styles.deliveryGroup}>
+            <View className={styles.deliveryGroupHeader}>
+              <Text className={styles.deliveryGroupName}>{group.milestone.name}</Text>
+              <Text className={styles.deliveryGroupCount}>
+                {group.sentCount}/{group.files.length}
+              </Text>
+            </View>
+            {group.files.length > 0 ? (
+              <View className={styles.deliveryFileList}>
+                {group.files.map((file) => (
+                  <View
+                    key={file.id}
+                    className={classnames(
+                      styles.deliveryFileItem,
+                      file.sentToClient && styles.deliveryFileSent
+                    )}
+                  >
+                    <View className={styles.deliveryFileInfo}>
+                      <Text className={styles.deliveryFileName}>
+                        {file.sentToClient ? '✅' : '⏳'} {file.name}
+                      </Text>
+                      <Text className={styles.deliveryFileMeta}>
+                        {file.typeLabel} · {file.version}
+                      </Text>
+                    </View>
+                    <View
+                      className={classnames(
+                        styles.deliveryToggle,
+                        file.sentToClient && styles.deliveryToggleActive
+                      )}
+                      onClick={(e) => handleToggleSent(file.id, e)}
+                    >
+                      <Text className={styles.deliveryToggleText}>
+                        {file.sentToClient ? '已发送' : '标记发送'}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            ) : (
+              <View className={styles.deliveryEmpty}>
+                <Text className={styles.deliveryEmptyText}>暂无交付文件</Text>
+              </View>
+            )}
+          </View>
+        ))}
+      </View>
+
       <View className={styles.bottomBar}>
         <Button
           className={classnames(
@@ -411,7 +489,10 @@ const ProjectDetailPage: React.FC = () => {
           {project.finalPaymentReceived ? '取消尾款' : '尾款已收'}
         </Button>
         <Button className={classnames(styles.barBtn, styles.btnPrimary)} onClick={handleEditProject}>
-          编辑项目
+          编辑
+        </Button>
+        <Button className={classnames(styles.barBtn, styles.btnPurple)} onClick={handleViewReview}>
+          复盘
         </Button>
       </View>
     </View>

@@ -159,7 +159,11 @@ const MaterialEditPage: React.FC = () => {
     });
 
     setTimeout(() => {
-      Taro.navigateBack();
+      if (isEditMode) {
+        Taro.navigateBack();
+      } else {
+        Taro.redirectTo({ url: '/pages/materials/index?autoSelect=true' });
+      }
     }, 800);
   };
 

@@ -12,7 +12,8 @@ export default defineAppConfig({
     'pages/client-edit/index',
     'pages/quote-edit/index',
     'pages/project-edit/index',
-    'pages/material-edit/index'
+    'pages/material-edit/index',
+    'pages/project-review/index'
   ],
   window: {
     backgroundTextStyle: 'light',

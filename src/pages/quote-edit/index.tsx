@@ -159,7 +159,11 @@ const QuoteEditPage: React.FC = () => {
     Taro.showToast({ title: isEdit ? '更新成功' : '创建成功', icon: 'success' });
 
     setTimeout(() => {
-      Taro.navigateBack();
+      if (isEdit) {
+        Taro.navigateBack();
+      } else {
+        Taro.redirectTo({ url: '/pages/quotes/index?autoSelect=true' });
+      }
     }, 1000);
   };
 
